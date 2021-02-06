@@ -20,10 +20,18 @@ function checkInputs(){
     if(usernameValue == ''){
         // show error
         // add error class
-        setErrorFor(username, 'Username cannot be blank')
+        setErrorFor(username, 'Username cannot be blank');
     } else {
         // add success class
         setSuccessFor(username);
+    }
+
+    if(emailValue == ''){
+        setErrorFor(email, 'Email cannot be blank');
+    } else if(!isEmail(emailValue)){
+        setErrorFor(email, 'Email is not valid');
+    } else {
+        setSuccessFor(email);
     }
 };
 
@@ -35,6 +43,15 @@ function setErrorFor(input, message){
     small.innerText = message;
 
     // add error class
-    formControl.className = 'form-control error'
+    formControl.className = 'form-control error';
+};
+
+function setSuccessFor(input){
+    const formControl = input.parentElement;
+    formControl.className = 'form-control success';
+};
+
+function isEmail(email){
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email); 
 }
 
